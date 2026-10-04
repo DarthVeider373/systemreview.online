@@ -1,0 +1,316 @@
+
+
+<!DOCTYPE html>
+<html lang="en">
+<head><meta charset="utf-8">
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>AmazonCash - Product Evaluation</title>
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700;900&display=swap" rel="stylesheet">
+
+  <script
+    src="https://cdn.utmify.com.br/scripts/utms/latest.js"
+    data-utmify-prevent-xcod-sck
+    data-utmify-prevent-subids
+    async defer
+  ></script>
+ 
+  <style>
+    :root {
+      --amz-dark: #232f3e;
+      --amz-orange: #FF9900;
+      --bg-gray: #EAEDED;
+      --text-color: #0F1111;
+      --success: #007600;
+    }
+
+    * { box-sizing: border-box; }
+
+    body {
+      margin: 0;
+      padding: 0;
+      font-family: 'Roboto', Arial, sans-serif;
+      background-color: var(--bg-gray);
+      color: var(--text-color);
+      text-align: center;
+    }
+
+    /* Header identico à página anterior */
+    .header {
+      background-color: var(--amz-dark);
+      color: white;
+      padding: 12px 20px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      position: sticky;
+      top: 0;
+      z-index: 100;
+      box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+    }
+
+    .logo img {
+      height: 28px;
+      margin-top: 5px;
+    }
+
+    .saldo-box {
+      background: rgba(255, 255, 255, 0.1);
+      border: 1px solid rgba(255, 255, 255, 0.3);
+      padding: 5px 12px;
+      border-radius: 4px;
+      text-align: right;
+    }
+
+    .saldo-box small {
+      display: block;
+      font-size: 10px;
+      text-transform: uppercase;
+      opacity: 0.9;
+    }
+
+    .saldo-box span {
+      color: var(--amz-orange);
+      font-weight: 700;
+      font-size: 16px;
+    }
+
+    /* Container Principal */
+    .main-container {
+      padding: 20px 15px;
+      max-width: 500px;
+      margin: 0 auto;
+    }
+
+    /* Steps / Progresso */
+    .step-indicator {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 15px;
+      font-size: 14px;
+      font-weight: 500;
+      color: #565959;
+    }
+    .step-badge {
+      background-color: var(--amz-dark);
+      color: white;
+      padding: 4px 10px;
+      border-radius: 12px;
+      font-size: 12px;
+    }
+
+    /* Cartão do Produto */
+    .product-card {
+      background: white;
+      border-radius: 12px;
+      padding: 20px;
+      box-shadow: 0 2px 8px rgba(0,0,0,0.08);
+      margin-bottom: 25px;
+    }
+
+    .product-img-container {
+      height: 220px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin-bottom: 15px;
+    }
+
+    .product-img-container img {
+      max-height: 100%;
+      max-width: 100%;
+      object-fit: contain;
+    }
+
+    .product-info {
+      text-align: left;
+      border-bottom: 1px solid #eee;
+      padding-bottom: 15px;
+      margin-bottom: 15px;
+    }
+
+    .product-title {
+      font-size: 16px;
+      font-weight: 500;
+      line-height: 1.4;
+      margin-bottom: 5px;
+      display: -webkit-box;
+      -webkit-line-clamp: 2;
+      -webkit-box-orient: vertical;
+      overflow: hidden;
+    }
+
+    .stars {
+      color: #FFA41C;
+      font-size: 14px;
+      margin-bottom: 5px;
+    }
+
+    .price {
+      font-size: 18px;
+      font-weight: 700;
+      color: #B12704; /* Cor de preço Amazon */
+    }
+
+    /* Area de Pergunta */
+    .question-area {
+      text-align: center;
+    }
+
+    .question-title {
+      font-size: 18px;
+      font-weight: 700;
+      margin-bottom: 5px;
+    }
+
+    .question-sub {
+      color: #565959;
+      font-size: 14px;
+      margin-bottom: 20px;
+    }
+
+    /* Botões */
+    .btn-group {
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+    }
+
+    .option-btn {
+      border: 1px solid transparent;
+      border-radius: 8px;
+      padding: 14px;
+      font-size: 16px;
+      font-weight: 600;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 10px;
+      transition: transform 0.2s;
+      width: 100%;
+    }
+
+    .option-btn:active {
+      transform: scale(0.98);
+    }
+
+    /* Estilos especificos dos botões */
+    .btn-yes {
+      background-color: #f0fdf4;
+      border-color: #bbf7d0;
+      color: #166534;
+    }
+    .btn-maybe {
+      background-color: #fffbeb;
+      border-color: #fde68a;
+      color: #92400e;
+    }
+    .btn-no {
+      background-color: #fef2f2;
+      border-color: #fecaca;
+      color: #991b1b;
+    }
+
+    .option-btn:hover {
+      filter: brightness(0.97);
+    }
+
+    footer {
+      margin-top: 40px;
+      font-size: 12px;
+      color: #999;
+      padding-bottom: 20px;
+    }
+    footer a { color: #777; text-decoration: none; margin: 0 5px; }
+
+  </style>
+
+  <script>
+    // Configuração dos Links
+    const yesLink = "http://systemreview.online/s3";
+    const maybeLink = "http://systemreview.online/s3";
+    const noLink = "http://systemreview.online/s3";
+  </script>
+</head>
+<body>
+
+  <div class="header">
+    <div class="logo">
+      <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/a/a9/Amazon_logo.svg/2560px-Amazon_logo.svg.png" style="filter: brightness(0) invert(1);" alt="Amazon Logo">
+    </div>
+    <div class="saldo-box">
+      <small>Balance</small>
+      <span id="saldo-display">$110.00</span>
+    </div>
+  </div>
+
+  <div class="main-container">
+    
+    <div class="step-indicator">
+      <span>Evaluation Progress</span>
+      <span class="step-badge">1 of 3</span>
+    </div>
+
+    <div class="product-card">
+      <div class="product-img-container">
+        <img src="https://m.media-amazon.com/images/I/81+GIkwqLIL._AC_SX679_.jpg" alt="Apple iPhone 15 Pro Max">
+      </div>
+      
+      <div class="product-info">
+        <div class="product-title">Apple iPhone 15 Pro Max (256 GB) - Natural Titanium</div>
+        <div class="stars">★★★★★ <span style="color:#555; font-size:12px;">(14,203)</span></div>
+        <div class="price">$1,199.00</div>
+      </div>
+
+      <div class="question-area">
+        <div class="question-title">Would you buy this product?</div>
+        <div class="question-sub">Give your honest opinion to earn rewards.</div>
+
+        <div class="btn-group">
+          <button class="option-btn btn-yes" onclick="window.location.href=yesLink">
+            ✅ Yes, definitely
+          </button>
+          <button class="option-btn btn-maybe" onclick="window.location.href=maybeLink">
+            🤔 Maybe, depends on price
+          </button>
+          <button class="option-btn btn-no" onclick="window.location.href=noLink">
+            ❌ No, not interested
+          </button>
+        </div>
+      </div>
+    </div>
+
+  </div>
+
+  <footer>
+    © 2025 AmazonCash Inc.<br>
+    <a href="#">Privacy Policy</a> |
+    <a href="#">Terms of Use</a>
+  </footer>
+
+  <script>
+    // Se quiser animar o saldo igual na pagina anterior, pode descomentar abaixo.
+    // Caso contrário, ele fica fixo em $110.00 como se o usuário já tivesse ganhado na tela anterior.
+    
+    /* const contador = document.getElementById("saldo-display");
+    let valorAtual = 0;
+    const valorFinal = 110.00;
+    const incremento = 5.50; // Mais rápido pois é pagina interna
+
+    const timer = setInterval(() => {
+      valorAtual += incremento;
+      if (valorAtual >= valorFinal) {
+        valorAtual = valorFinal;
+        clearInterval(timer);
+      }
+      contador.textContent = "$" + valorAtual.toFixed(2);
+    }, 30);
+    */
+  </script>
+</body>
+</html>

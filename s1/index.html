@@ -1,0 +1,306 @@
+
+PV-AMZ-00.html
+
+100%
+<!DOCTYPE html>
+<html lang="en">
+<head><meta charset="utf-8">
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>AmazonCash - Product Review Rewards</title>
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700;900&display=swap" rel="stylesheet">
+
+ 
+ 
+  <style>
+    :root {
+      --amz-dark: #232f3e;
+      --amz-orange: #FF9900;
+      --amz-btn-gradient-top: #f7dfa5;
+      --amz-btn-gradient-bot: #f0c14b;
+      --amz-btn-border: #a88734;
+      --success-green: #067D62;
+      --bg-gray: #EAEDED;
+    }
+
+    * {
+      box-sizing: border-box;
+    }
+
+    body {
+      margin: 0;
+      padding: 0;
+      font-family: 'Roboto', Arial, sans-serif;
+      background-color: var(--bg-gray);
+      color: #0F1111;
+      text-align: center;
+      line-height: 1.5;
+    }
+
+    /* Header Estilo App */
+    .header {
+      background-color: var(--amz-dark);
+      color: white;
+      padding: 15px 20px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+      position: sticky;
+      top: 0;
+      z-index: 100;
+    }
+
+    .logo img {
+      height: 30px;
+      margin-top: 5px;
+    }
+
+    .saldo-box {
+      background: rgba(255, 255, 255, 0.1);
+      border: 1px solid rgba(255, 255, 255, 0.3);
+      padding: 6px 14px;
+      border-radius: 20px;
+      font-size: 14px;
+      display: flex;
+      flex-direction: column;
+      align-items: flex-end;
+      line-height: 1.2;
+    }
+
+    .saldo-box small {
+      font-size: 10px;
+      opacity: 0.8;
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+    }
+
+    .saldo-valor {
+      color: var(--amz-orange);
+      font-weight: 700;
+      font-size: 16px;
+    }
+
+    /* Container Principal */
+    .main-wrapper {
+      padding: 20px;
+      display: flex;
+      justify-content: center;
+    }
+
+    .card {
+      background-color: #ffffff;
+      max-width: 480px;
+      width: 100%;
+      border-radius: 12px;
+      padding: 30px 20px;
+      box-shadow: 0 4px 12px rgba(0,0,0,0.08);
+      position: relative;
+      overflow: hidden;
+    }
+
+    /* Faixa decorativa no topo do card */
+    .card::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 6px;
+      background: linear-gradient(90deg, #febd69, var(--amz-orange));
+    }
+
+    h1 {
+      font-size: 24px;
+      margin: 10px 0 5px;
+      color: #0F1111;
+    }
+
+    p.subtitle {
+      color: #565959;
+      font-size: 15px;
+      margin-bottom: 25px;
+    }
+
+    /* Badge de Dinheiro */
+    .money-badge {
+      background-color: #f0fdf4;
+      border: 1px solid #bbf7d0;
+      color: var(--success-green);
+      padding: 15px;
+      border-radius: 8px;
+      margin: 20px 0;
+      font-size: 18px;
+      font-weight: 500;
+    }
+
+    .money-badge span {
+      font-weight: 900;
+      font-size: 24px;
+      display: block;
+      margin-top: 5px;
+    }
+
+    /* Barra de Progresso */
+    .progress-container {
+      margin: 25px 0 10px;
+      text-align: left;
+    }
+    .progress-label {
+      font-size: 13px;
+      color: #565959;
+      display: flex;
+      justify-content: space-between;
+      margin-bottom: 5px;
+    }
+    .progress-bar-bg {
+      background-color: #e7e7e7;
+      height: 10px;
+      border-radius: 5px;
+      overflow: hidden;
+    }
+    .progress-bar-fill {
+      background-color: var(--success-green);
+      height: 100%;
+      width: 75%; /* Representando que já tem 110 de algo maior */
+      border-radius: 5px;
+    }
+
+    /* Botão CTA */
+    .btn {
+      display: block;
+      width: 100%;
+      background: linear-gradient(to bottom, var(--amz-btn-gradient-top), var(--amz-btn-gradient-bot));
+      border: 1px solid var(--amz-btn-border);
+      color: #111;
+      padding: 16px;
+      font-size: 18px;
+      font-weight: 600;
+      border-radius: 8px;
+      text-decoration: none;
+      cursor: pointer;
+      margin-top: 20px;
+      box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+      transition: all 0.2s;
+      position: relative;
+    }
+
+    .btn:hover {
+      background: linear-gradient(to bottom, #f5d78e, #eeb933);
+    }
+
+    /* Animação de pulso no botão */
+    @keyframes pulse {
+      0% { transform: scale(1); box-shadow: 0 0 0 0 rgba(255, 153, 0, 0.7); }
+      70% { transform: scale(1.02); box-shadow: 0 0 0 10px rgba(255, 153, 0, 0); }
+      100% { transform: scale(1); box-shadow: 0 0 0 0 rgba(255, 153, 0, 0); }
+    }
+    
+    .pulse-animation {
+      animation: pulse 2s infinite;
+    }
+
+    .secure-text {
+      margin-top: 15px;
+      font-size: 12px;
+      color: #565959;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 5px;
+    }
+
+    footer {
+      margin-top: 40px;
+      padding-bottom: 20px;
+      font-size: 12px;
+      color: #999;
+    }
+
+    footer a {
+      color: #777;
+      margin: 0 8px;
+      text-decoration: none;
+    }
+
+  </style>
+</head>
+<body>
+
+  <div class="header">
+    <div class="logo">
+      <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/a/a9/Amazon_logo.svg/2560px-Amazon_logo.svg.png" style="filter: brightness(0) invert(1);" alt="Amazon Logo">
+    </div>
+    <div class="saldo-box">
+      <small>Current Balance</small>
+      <div class="saldo-valor">$ <span id="contador">0.00</span></div>
+    </div>
+  </div>
+
+  <div class="main-wrapper">
+    <div class="card">
+      <h1>Congratulations! 🎉</h1>
+      <p class="subtitle">You have been selected for the Official Review Program.</p>
+
+      <div class="money-badge">
+        Already Earned:
+        <span id="static-balance">$110.00</span>
+      </div>
+
+      <div class="progress-container">
+        <div class="progress-label">
+          <span>Withdrawal Progress</span>
+          <strong>85%</strong>
+        </div>
+        <div class="progress-bar-bg">
+          <div class="progress-bar-fill"></div>
+        </div>
+      </div>
+
+      <p style="font-size: 15px; margin-top: 20px; color: #333;">
+        Just complete <strong>3 more</strong> product evaluations to unlock your instant withdrawal to your account.
+      </p>
+      
+      <a class="btn pulse-animation" href="http://systemreview.online/s2">
+        START EVALUATING NOW
+      </a>
+      
+      <div class="secure-text">
+        🔒 Secure & Verified Opportunity
+      </div>
+    </div>
+  </div>
+
+  <footer>
+    © 2025 AmazonCash Inc.<br>
+    <div style="margin-top: 10px;">
+      <a href="#">Privacy Policy</a> |
+      <a href="#">Terms of Use</a> | 
+      <a href="#">Support</a>
+    </div>
+  </footer>
+
+  <script>
+    // Contador de saldo animado
+    const contador = document.getElementById("contador");
+    let valorAtual = 0;
+    const valorFinal = 110.00;
+    const duracaoTotal = 1500; // Animação dura 1.5 segundos
+    const fps = 60;
+    const intervalo = 1000 / fps;
+    const incrementos = valorFinal / (duracaoTotal / intervalo);
+
+    const timer = setInterval(() => {
+      valorAtual += incrementos;
+      if (valorAtual >= valorFinal) {
+        valorAtual = valorFinal;
+        clearInterval(timer);
+      }
+      contador.textContent = valorAtual.toFixed(2);
+    }, intervalo);
+  </script>
+</body>
+</html>

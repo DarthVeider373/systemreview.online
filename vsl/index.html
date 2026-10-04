@@ -1,0 +1,350 @@
+<!DOCTYPE html>
+<html lang="en">
+<head><meta charset="utf-8">
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>AmazonCash - Secure Withdrawal</title>
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700;900&display=swap" rel="stylesheet">
+
+  
+  
+  <style>
+    :root {
+      --amz-dark: #232f3e;
+      --amz-orange: #FF9900;
+      --bg-gray: #EAEDED;
+      --text-color: #0F1111;
+      --link-blue: #007185;
+      --success-green: #067D62;
+      --alert-yellow: #FFF3CD;
+      --alert-border: #FFEeba;
+    }
+
+    * { box-sizing: border-box; }
+
+    body {
+      margin: 0;
+      padding: 0;
+      font-family: 'Roboto', Arial, sans-serif;
+      background-color: var(--bg-gray);
+      color: var(--text-color);
+      text-align: center;
+    }
+
+    /* Header */
+    .header {
+      background-color: var(--amz-dark);
+      padding: 15px 20px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+    }
+    .logo img { height: 30px; margin-top: 5px; }
+    
+    .saldo-badge {
+      background: #fff;
+      color: #111;
+      padding: 5px 10px;
+      border-radius: 4px;
+      font-weight: bold;
+      font-size: 14px;
+    }
+    .saldo-badge span { color: #B12704; }
+
+    /* Alert Box */
+    .alert-box {
+      background-color: #fff;
+      border-left: 5px solid #ffa41c;
+      padding: 15px;
+      margin: 15px auto;
+      max-width: 640px;
+      text-align: left;
+      box-shadow: 0 1px 3px rgba(0,0,0,0.1);
+      width: 95%;
+    }
+    .alert-title { font-weight: 700; color: #c45500; display: flex; align-items: center; gap: 8px; font-size: 15px;}
+    .alert-msg { font-size: 13px; margin-top: 5px; color: #333; }
+
+    /* Main Container */
+    .container {
+      max-width: 640px;
+      margin: 0 auto;
+      padding: 0 15px;
+    }
+
+    /* Video Box */
+    .video-wrapper {
+      background: #fff;
+      padding: 10px;
+      border-radius: 8px;
+      box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+      margin-bottom: 25px;
+    }
+    .video-title {
+      font-size: 18px;
+      font-weight: 700;
+      margin-bottom: 10px;
+      line-height: 1.3;
+    }
+
+    /* VSL Embed Container */
+    .embed-container {
+      position: relative;
+      width: 100%;
+      padding-bottom: 56.25%; /* 16:9 Aspect Ratio */
+      height: 0;
+      overflow: hidden;
+      border-radius: 6px;
+      background: #000;
+    }
+    .embed-container iframe, 
+    .embed-container object, 
+    .embed-container embed,
+    .embed-container > div {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+    }
+
+    /* --- ESCONDIDO / OFFER SECTION --- */
+    .esconder { display: none; }
+
+    .offer-box {
+      background: #fff;
+      border: 1px solid #d5d9d9;
+      border-radius: 8px;
+      padding: 20px;
+      margin: 20px auto;
+      text-align: center;
+      box-shadow: 0 4px 10px rgba(0,0,0,0.05);
+    }
+    
+    .price-tag { font-size: 24px; color: #B12704; font-weight: 700; }
+    .old-price { text-decoration: line-through; color: #565959; font-size: 14px; margin-right: 5px; }
+    
+    .countdown-timer {
+      color: #B12704;
+      font-weight: bold;
+      font-size: 18px;
+      margin: 10px 0;
+    }
+
+    /* Amazon Style Button */
+    .cta-btn {
+      background: linear-gradient(to bottom, #f7dfa5, #f0c14b);
+      border: 1px solid #a88734;
+      color: #111;
+      width: 100%;
+      padding: 15px;
+      border-radius: 20px;
+      font-size: 18px;
+      font-weight: 600;
+      cursor: pointer;
+      text-decoration: none;
+      display: block;
+      margin-top: 10px;
+      box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+    }
+    .cta-btn:hover { background: linear-gradient(to bottom, #f5d78e, #eeb933); }
+
+    /* Reviews Section */
+    .reviews-section {
+      background: #fff;
+      padding: 20px;
+      margin-top: 30px;
+      border-top: 1px solid #ddd;
+      text-align: left;
+    }
+    
+    .review-header { font-size: 20px; font-weight: 700; margin-bottom: 20px; }
+    
+    .review-item {
+      border-bottom: 1px solid #eee;
+      padding-bottom: 15px;
+      margin-bottom: 15px;
+    }
+    
+    .reviewer-profile { display: flex; align-items: center; gap: 10px; margin-bottom: 5px; }
+    .avatar { width: 34px; height: 34px; border-radius: 50%; }
+    .reviewer-name { font-size: 13px; font-weight: 500; }
+    
+    .stars { color: #ffa41c; font-size: 14px; margin-right: 5px; }
+    .verified-badge { color: #c45500; font-size: 11px; font-weight: 700; }
+    .review-date { color: #565959; font-size: 12px; margin-bottom: 5px; display: block;}
+    
+    .review-text { font-size: 14px; line-height: 1.4; color: #333; }
+
+    footer {
+      margin-top: 40px;
+      font-size: 11px;
+      color: #999;
+      padding-bottom: 20px;
+    }
+    footer a { color: #777; margin: 0 5px; text-decoration: none; }
+
+  </style>
+  <script>!function(i,n){i._plt=i._plt||(n&&n.timeOrigin?n.timeOrigin+n.now():Date.now())}(window,performance);</script>
+<link rel="preload" href="https://scripts.converteai.net/beb06ebc-0219-4b97-b88f-8ccab6eb2442/players/6ac1858fdc76759199e07e38/v4/player.js" as="script">
+<link rel="preload" href="https://scripts.converteai.net/lib/js/smartplayer-wc/v4/smartplayer.js" as="script">
+<link rel="preload" href="https://cdn.converteai.net/beb06ebc-0219-4b97-b88f-8ccab6eb2442/6ac1852b663e7b1a67f20df6/main.m3u8" as="fetch">
+<link rel="dns-prefetch" href="https://cdn.converteai.net">
+<link rel="dns-prefetch" href="https://scripts.converteai.net">
+<link rel="dns-prefetch" href="https://images.converteai.net">
+<link rel="dns-prefetch" href="https://license.vturb.com">
+</head>
+<body>
+
+  <div class="header">
+    <div class="logo">
+      <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/a/a9/Amazon_logo.svg/2560px-Amazon_logo.svg.png" style="filter: brightness(0) invert(1);" alt="Amazon Logo">
+    </div>
+    <div class="saldo-badge">
+      Balance: <span id="contador">$213.91</span>
+    </div>
+  </div>
+
+  <div class="alert-box">
+    <div class="alert-title">
+      ⚠️ Action Required: Withdrawal Pending
+    </div>
+    <div class="alert-msg">
+      Your balance of <strong>$213.91</strong> is currently on hold. Please watch the video below to authorize the transfer to your account.
+    </div>
+  </div>
+
+  <div class="container">
+      
+<vturb-smartplayer id="vid-6ac1858fdc76759199e07e38" style="display: block; margin: 0 auto; width: 100%; "><div class="vturb-player-placeholder" style="position: relative; width: 100%; padding: 56.25% 0 0; z-index: 0; background-color: black;"></div></vturb-smartplayer> <script type="text/javascript"> var s=document.createElement("script"); s.src="https://scripts.converteai.net/beb06ebc-0219-4b97-b88f-8ccab6eb2442/players/6ac1858fdc76759199e07e38/v4/player.js", s.async=!0,document.head.appendChild(s); </script>
+    <section class="esconder">
+      <div class="offer-box">
+        <h3 style="margin-top:0;">🎉 Fee Discount Unlocked!</h3>
+        <p>Complete the security fee payment to release your full balance instantly.</p>
+        
+        <div style="margin: 15px 0;">
+          <span class="old-price">$67.00</span>
+          <span class="price-tag">$39.00</span>
+        </div>
+
+        <div style="font-size: 13px; color: #555;">Offer expires in:</div>
+        <div id="countdown" class="countdown-timer">15:00</div>
+
+        <a href="https://www.checkout-ds24.com/product/607866" class="cta-btn">
+          UNLOCK WITHDRAWAL NOW
+        </a>
+        
+        <div style="margin-top: 10px; font-size: 11px; color: #777;">
+          🔒 SSL Secure Transaction
+        </div>
+      </div>
+    </section>
+
+  </div>
+
+  <div class="reviews-section">
+    <div class="review-header">Top reviews from United States</div>
+
+    <div class="review-item">
+      <div class="reviewer-profile">
+        <img src="https://i.pravatar.cc/40?img=12" class="avatar">
+        <span class="reviewer-name">Alex R.</span>
+      </div>
+      <span class="stars">★★★★★</span> <span class="verified-badge">Verified Purchase</span>
+      <span class="review-date">Reviewed in the United States on January 15, 2026</span>
+      <div class="review-text">I was skeptical but I just paid the small fee and the $213 hit my account instantly. Legit!</div>
+    </div>
+
+    <div class="review-item">
+      <div class="reviewer-profile">
+        <img src="https://i.pravatar.cc/40?img=44" class="avatar">
+        <span class="reviewer-name">Sarah Jenkins</span>
+      </div>
+      <span class="stars">★★★★★</span> <span class="verified-badge">Verified Purchase</span>
+      <span class="review-date">Reviewed in the United States on January 14, 2026</span>
+      <div class="review-text">Works perfectly. The video explains everything clearly.</div>
+    </div>
+
+    <div class="review-item">
+      <div class="reviewer-profile">
+        <img src="https://i.pravatar.cc/40?img=33" class="avatar">
+        <span class="reviewer-name">Michael T.</span>
+      </div>
+      <span class="stars">★★★★☆</span> <span class="verified-badge">Verified Purchase</span>
+      <span class="review-date">Reviewed in the United States on January 10, 2026</span>
+      <div class="review-text">Took about 10 minutes to process but the money is there. Recommend.</div>
+    </div>
+  </div>
+
+  <footer>
+    © 1996-2026, Amazon.com, Inc. or its affiliates<br>
+    <a href="#">Privacy Notice</a> | <a href="#">Conditions of Use</a>
+  </footer>
+
+  <script>
+    // 1. Timer de Contagem Regressiva (Corrigido)
+    document.addEventListener("DOMContentLoaded", function() {
+      let time = 15 * 60; // 15 minutos
+      const countdownEl = document.getElementById("countdown");
+      
+      const updateTimer = setInterval(() => {
+        const minutes = Math.floor(time / 60);
+        const seconds = time % 60;
+        
+        // Formatação correta com template literals
+        countdownEl.textContent = `${minutes.toString().padStart(2, '0')}:${seconds.toString().padStart(2, '0')}`;
+        
+        time--;
+        if (time < 0) clearInterval(updateTimer);
+      }, 1000);
+    });
+
+    // 2. Lógica para Aparecer o Botão (Delay)
+    document.addEventListener("DOMContentLoaded", function () {
+      // TEMPO EM SEGUNDOS PARA O BOTÃO APARECER (668s = 11min 8s)
+      // Para testar, mude para 5 segundos
+      const SECONDS_TO_DISPLAY = 668; 
+      const CLASS_TO_DISPLAY = ".esconder";
+
+      const alreadyDisplayedKey = "btn_revealed_" + SECONDS_TO_DISPLAY;
+      let alreadyDisplayed = false;
+      try {
+        alreadyDisplayed = localStorage.getItem(alreadyDisplayedKey) === "true";
+      } catch (e) {}
+
+      const showElements = () => {
+        document.querySelectorAll(CLASS_TO_DISPLAY).forEach(el => {
+          el.style.display = "block";
+          // Scroll suave até a oferta
+          el.scrollIntoView({ behavior: 'smooth' });
+        });
+        try {
+          localStorage.setItem(alreadyDisplayedKey, "true");
+        } catch (e) {}
+      };
+
+      if (alreadyDisplayed) {
+        showElements();
+      } else {
+        // Integração com Smartplayer (ConverteAI)
+        const waitForSmartplayer = () => {
+          if (typeof smartplayer === 'undefined' || !smartplayer.instances || !smartplayer.instances.length) {
+            return setTimeout(waitForSmartplayer, 1000);
+          }
+          const player = smartplayer.instances[0];
+          player.on('timeupdate', () => {
+            if (player.video.currentTime >= SECONDS_TO_DISPLAY) {
+              showElements();
+            }
+          });
+        };
+        waitForSmartplayer();
+      }
+    });
+  </script>
+</body>
+</html>
