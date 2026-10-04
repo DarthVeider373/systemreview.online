@@ -1,0 +1,14 @@
+AMAZON ASSOCIATES INFORMATIONAL SITE — ENGLISH VERSION
+
+BEFORE PUBLISHING:
+1. Replace “Affiliate Guide” with your real site or brand name.
+2. Replace contact@yourdomain.com with a real email address.
+3. Add the real website owner/company information to About and Privacy.
+4. Publish over HTTPS and test every navigation and external link.
+5. If you install Meta Pixel, Google Analytics, or other tracking tools, update the Privacy Policy and Cookie Policy and implement applicable consent requirements.
+6. If you add affiliate links, clearly disclose the affiliate relationship near those links/content.
+7. Keep the required Amazon disclosure visible: “As an Amazon Associate I earn from qualifying purchases.”
+8. Do not advertise guaranteed earnings, Amazon jobs, easy-money claims, fake scarcity, misleading testimonials, or results that the page cannot substantiate.
+9. Do not use automatic redirects, cloaking, or show different content to reviewers and users.
+10. Confirm the current Amazon Associates rules for your target country before using paid traffic.
+11. This structure may reduce compliance risk but cannot guarantee ad approval by Meta or acceptance by Amazon.
