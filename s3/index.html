@@ -270,9 +270,17 @@
       contador.textContent = "$" + valorAtual.toFixed(2);
     }, intervalo);
   </script>
+  
   <script>
 document.addEventListener('click', function(e){
-  if (e.target.closest('.btn-comprar')) fbq('track','InitiateCheckout');
+  var a = e.target.closest('a[href*="systemreview.online/vsl"]');
+  if (!a) return;
+
+  var dest = new URL(a.href);
+  new URLSearchParams(window.location.search).forEach(function(v, k){
+    dest.searchParams.set(k, v);
+  });
+  a.href = dest.toString();
 });
 </script>
 </body>
