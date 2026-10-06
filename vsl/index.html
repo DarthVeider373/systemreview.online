@@ -349,5 +349,11 @@
       }
     });
   </script>
+  
+  <script>
+document.addEventListener('click', function(e){
+  if (e.target.closest('.btn-comprar')) fbq('track','InitiateCheckout');
+});
+</script>
 </body>
 </html>
