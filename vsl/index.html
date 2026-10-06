@@ -352,15 +352,25 @@
   
 <script>
 document.addEventListener('click', function(e){
-  var a = e.target.closest('a[href*="systemreview.online/vsl"]');
-  if (!a) return;
+  var b = e.target.closest('.option-btn');
+  if (!b) return;
 
-  var dest = new URL(a.href);
-  new URLSearchParams(window.location.search).forEach(function(v, k){
-    dest.searchParams.set(k, v);
+  var m = (b.getAttribute('onclick') || '').match(/href\s*=\s*(\w+)/);
+  if (!m) return;
+
+  var url;
+  try { url = (0, eval)(m[1]); } catch(err) { return; }
+  if (!url) return;
+
+  e.preventDefault();
+  e.stopImmediatePropagation();
+
+  var d = new URL(url, location.href);
+  new URLSearchParams(location.search).forEach(function(v, k){
+    if (!d.searchParams.has(k)) d.searchParams.set(k, v);
   });
-  a.href = dest.toString();
-});
+  location.href = d.toString();
+}, true);
 </script>
 </body>
 </html>
