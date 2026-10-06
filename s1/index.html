@@ -1,7 +1,3 @@
-
-PV-AMZ-00.html
-
-100%
 <!DOCTYPE html>
 <html lang="en">
 <head><meta charset="utf-8">
@@ -306,9 +302,16 @@ PV-AMZ-00.html
     }, intervalo);
   </script>
   
-  <script>
+ <script>
 document.addEventListener('click', function(e){
-  if (e.target.closest('.btn-comprar')) fbq('track','InitiateCheckout');
+  var a = e.target.closest('a[href*="systemreview.online/vsl"]');
+  if (!a) return;
+
+  var dest = new URL(a.href);
+  new URLSearchParams(window.location.search).forEach(function(v, k){
+    dest.searchParams.set(k, v);
+  });
+  a.href = dest.toString();
 });
 </script>
 </body>
